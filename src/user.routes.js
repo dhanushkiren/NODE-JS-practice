@@ -9,7 +9,11 @@ const router = express.Router();
 
 router.get("/all", userController.getAllUser);
 
-router.get("/:id", expressYupMiddleware({ getUser }), userController.getUser);
+router.get(
+  "/:id",
+  expressYupMiddleware({ schemaValidator: getUser }),
+  userController.getUser
+);
 
 router.post(
   "/",
@@ -31,7 +35,7 @@ router.put(
 
 router.delete(
   "/:id",
-  expressYupMiddleware({ deleteUser }),
+  expressYupMiddleware({ schemaValidator: deleteUser }),
   userController.deleteUser
 );
 
