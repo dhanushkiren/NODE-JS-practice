@@ -1,49 +1,38 @@
 import users from "../data/users.data.js";
 
 /**
- * 
- * @param {Number} userId 
+ *
+ * @param {Number} userId
  * @returns {*}
  */
-const get = (userId) => {
-  const findUser = users.find((user) => {
-    if (user.id === userId) {
-      return user;
-    }
-    return null;
-  });
-  return findUser;
-};
+const get = (userId) => users.find((user) => user.id === userId);
 
-const getAll = () => {
-  return users;
-};
+const getAll = () => users;
 
 /**
- * 
- * @param {Object} details 
+ *
+ * @param {Object} details
  * @returns {*}
  */
 
 const insert = (details) => {
-  const newUser = { id: users.length + 1,...details };
+  const newUser = { id: users.length + 1, ...details };
   users.push(newUser);
   return newUser;
 };
 
 /**
  * Delete the user by ID
- * 
- * @param {Number} userId 
+ *
+ * @param {Number} userId
  * @returns {*}
  */
 
 const remove = (userId) => {
   const deleteUser = (user, index) => {
-    if (user.id === userId) {
+    if (user?.id === userId) {
       //remove the founded user....
       users.splice(index, 1);
-      return true;
     }
   };
 
@@ -52,9 +41,9 @@ const remove = (userId) => {
 
 /**
  * Update the user by ID
- * 
- * @param {Number} userId 
- * @param {Object} newDetails 
+ *
+ * @param {Number} userId
+ * @param {Object} newDetails
  * @returns {*}
  */
 const update = (userId, newDetails) => {

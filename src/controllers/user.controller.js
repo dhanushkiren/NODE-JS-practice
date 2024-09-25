@@ -45,7 +45,7 @@ const getUser = (req, res) => {
 
   return res.status(StatusCodes.NOT_FOUND).send({
     status: STATUS.failure,
-    mesasge: `user ${id} does not exist`,
+    message: `user ${id} does not exist`,
   });
 };
 
@@ -102,23 +102,24 @@ const updateUser = (req, res) => {
  * @returns
  */
 
-const deleteUser = (req, res) => {
+const removeUser = (req, res) => {
   const { params } = req;
+
   const id = parseInt(params.id);
   const user = userService.getUser(id);
-
   if (user) {
     userService.removeUser(id);
-    logger.info(`deleting the user of id ${id}`);
+
+    logger.info(`Removing user ID ${id}`);
 
     return res.status(StatusCodes.OK).send({
       status: STATUS.success,
-      message: `user ${id} has been removed`,
+      message: `User ${id} has been deleted.`,
     });
   } else {
     return res.status(StatusCodes.NOT_FOUND).send({
       status: STATUS.failure,
-      message: `user ${id} hasn't been removed`,
+      message: `User ${id} hasn't been found.`,
     });
   }
 };
@@ -128,5 +129,5 @@ export default {
   addUser,
   getAllUser,
   getUser,
-  deleteUser,
+  removeUser,
 };
